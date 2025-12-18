@@ -1,40 +1,15 @@
-# 🚀 share-binary
+# 🚀 Share Binary
 
-跨平台二进制工具集合，便于在不同操作系统和架构下分发和使用常用命令行工具。
+A collection of cross-platform binary tools for easy distribution and use of common command-line utilities across different operating systems and architectures.
 
-## 📁 目录结构
+## 🛠️ Included Tools
 
-```
-update.sh
-linux-arm64/
-linux-x86/
-osx-arm64/
-osx-x86/
-win-x86/
-```
+This repository includes the following command-line tools:
 
-各平台文件夹下包含对应架构的二进制文件，例如 `ffmpeg`、`ffprobe`、`scrcpy` 及相关依赖。
+- 🎬 **FFmpeg (`ffmpeg`, `ffprobe`):** A complete, cross-platform solution to record, convert and stream audio and video.
+- 📱 **Scrcpy:** An application to display and control Android devices connected via USB or TCP/IP.
+- 🛠️ **ADB (`adb`):** Android Debug Bridge, a versatile command-line tool that lets you communicate with a device. It is included within the `scrcpy` directories.
 
-- 🐧 `linux-arm64/`、`linux-x86/`：Linux 平台二进制
-- 🍎 `osx-arm64/`、`osx-x86/`：macOS 平台二进制
-- 🪟 `win-x86/`：Windows 平台二进制
+## 📄 License
 
-## 🔧 主要内容
-
-- 🎬 `ffmpeg` / `ffprobe`：音视频处理工具
-- 📱 `scrcpy`：安卓设备投屏与控制工具
-- 🛠️ `adb`：安卓调试桥
-
-## 📝 使用方法
-
-1. 选择对应平台和架构的文件夹
-2. 直接运行所需的二进制文件
-3. Windows 用户可使用批处理脚本快速启动
-
-## ⬆️ 更新
-
-运行 `update.sh` 可自动更新相关二进制文件（需配置好下载源和权限）。
-
-## 📄 许可
-
-请根据各工具的官方许可协议使用本项目中的二进制文件。
+The tools included in this project are subject to their respective official licenses. Please ensure your use of these tools complies with their licensing agreements.
