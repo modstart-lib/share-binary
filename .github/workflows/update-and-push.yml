@@ -1,0 +1,52 @@
+name: Update and Push Binaries
+
+on:
+  workflow_dispatch:
+    inputs:
+      update_type:
+        description: 'Component to update'
+        required: true
+        type: choice
+        options:
+          - all
+          - scrcpy
+          - ffmpeg
+          - ffprobe
+        default: 'all'
+
+jobs:
+  update-and-push:
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for push.sh
+      
+      - name: Install dependencies
+        run: |
+          brew install p7zip
+      
+      - name: Run update script
+        run: |
+          chmod +x update.sh
+          ./update.sh ${{ github.event.inputs.update_type }}
+      
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Run push script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          chmod +x push.sh
+          # Automatically confirm the push (bypass interactive prompt)
+          echo "yes" | ./push.sh
+      
+      - name: Send completion notification
+        if: success()
+        run: |
+          curl "${{ secrets.REPORT_URL_ME }}?title=✅ShareBinary已更新${{ github.event.inputs.update_type }}"
